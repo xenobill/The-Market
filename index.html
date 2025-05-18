@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Global Market</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo-bar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo" />
+        <span class="brand">THE MARKET</span>
+      </div>
+      <form class="search-form" onsubmit="handleSearch(event)">
+        <input type="text" placeholder="Search" id="searchInput" class="search-bar"/>
+      </form>
+      <div class="icons">
+        <span class="icon">🛒</span>
+        <span class="icon">🔔</span>
+        <a href="signin.html" class="signin-btn">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <h2>Search the Market</h2>
+      <form onsubmit="redirectToSearch(event)">
+        <input type="text" id="searchQuery" placeholder="What are you looking for?" required>
+        <button type="submit" class="gradient-btn">Search</button>
+      </form>
+
+    <section class="welcome">
+      <p><strong>Welcome,</strong><br>
+      to <em>the global market</em>, where you get stress free businesses.<br>
+      What are you buying from us today?</p>
+    </section>
+
+    <section class="categories">
+      <div class="category"><h3>Fashion <span class="more">more…</span></h3></div>
+      <div class="category"><h3>Electronics &<br>gadgets <span class="more">more…</span></h3></div>
+      <div class="category"><h3>Food & groceries <span class="more">more…</span></h3></div>
+      <div class="category"><h3>Building materials <span class="more">more…</span></h3></div>
+      <div class="category"><h3>Restaurants <span class="more">more…</span></h3></div>
+    </section>
+
+    <section class="user-buttons">
+      <a href="signin.html?user=merchant" class="gradient-btn">Merchant</a>
+      <a href="signin.html?user=customer" class="gradient-btn">Customer</a>
+    </section>
+
+    
+    </section>
+  </main>
+    <footer>
+    <p>Powered by: Xen Technologies</p>
+  </footer>
+  <script src="/script.js"></script>
+</body>
+</html>
