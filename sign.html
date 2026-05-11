@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - Glen Hub</title>
+  <link rel="stylesheet" href="glen.css">
+  <style>
+    .tab-btns { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; font-weight: bold; }
+    .tab-btns .active { background: var(--primary-color); color: #fff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .auth-message { margin-top: 16px; padding: 12px 14px; border-radius: 10px; background: rgba(255,255,255,0.08); color: #ff6b6b; font-size: 0.95rem; min-height: 1.5em; display: none; }
+    #dark-mode-toggle { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <span id="dark-mode-toggle" title="Toggle dark mode">🌙</span>
+  <main class="auth-container">
+    <div class="tab-btns">
+      <button id="merchant-tab" class="active" type="button">Merchant</button>
+      <button id="customer-tab" type="button">Customer</button>
+    </div>
+    <!-- Merchant Sign In -->
+    <div id="merchant-signin" class="tab-content active">
+      <h2 class="auth-title">Merchant Sign In</h2>
+      <form onsubmit="handleSignIn(event, 'merchant')">
+        <input type="email" id="merchant-signin-username" placeholder="Email" required>
+        <input type="password" id="merchant-signin-password" placeholder="Password" required>
+        <button type="submit" class="gradient-btn">Login</button>
+      </form>
+    </div>
+    <!-- Customer Sign In -->
+    <div id="customer-signin" class="tab-content">
+      <h2 class="auth-title">Customer Sign In</h2>
+      <form onsubmit="handleSignIn(event, 'customer')">
+        <input type="email" id="customer-signin-username" placeholder="Email" required>
+        <input type="password" id="customer-signin-password" placeholder="Password" required>
+        <button type="submit" class="gradient-btn">Login</button>
+      </form>
+    </div>
+    <div id="signin-message" class="auth-message"></div>
+    <p class="auth-switch">Don't have an account? <a href="signup.html">Sign Up</a></p>
+    <p class="auth-switch"><a href="admin-login.html">Sign in as Admin</a> | <a href="admin-signup.html">Sign up as Admin</a></p>
+  </main>
+  <script src="auth.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

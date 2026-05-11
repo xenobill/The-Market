@@ -1,3 +1,121 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up - Glen Hub</title>
+  <link rel="stylesheet" href="glen.css">
+  <style>
+    .tab-btns { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btns button { flex: 1; padding: 10px; border: none; border-radius: 8px; background: #eee; cursor: pointer; font-weight: bold; }
+    .tab-btns .active { background: var(--primary-color); color: #fff; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .name-fields { display: flex; gap: 10px; margin-bottom: 10px; }
+    .name-fields input { flex: 1; }
+    #dark-mode-toggle { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <span id="dark-mode-toggle" title="Toggle dark mode">🌙</span>
+  <main class="auth-container">
+    <div class="tab-btns">
+      <button id="merchant-tab-su" class="active" type="button">Merchant</button>
+      <button id="customer-tab-su" type="button">Customer</button>
+    </div>
+    <!-- Merchant Sign Up -->
+    <div id="merchant-signup" class="tab-content active">
+      <h2 class="auth-title">Merchant Sign Up</h2>
+      <form onsubmit="handleSignUp(event, 'merchant')">
+        <div class="name-fields">
+          <input type="text" id="merchant-signup-surname" placeholder="Surname" required>
+          <input type="text" id="merchant-signup-firstname" placeholder="First Name" required>
+          <input type="text" id="merchant-signup-middlename" placeholder="Middle Name">
+        </div>
+        <select id="merchant-signup-nationality" required>
+          <option value="">Select Nationality</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Kenya">Kenya</option>
+          <option value="South Africa">South Africa</option>
+          <option value="United States">United States</option>
+          <!-- Add more countries as needed -->
+        </select>
+        <input type="email" id="merchant-signup-email" placeholder="Email" required>
+        <input type="text" id="merchant-signup-username" placeholder="Username" required>
+        <input type="password" id="merchant-signup-password" placeholder="Password" required>
+        <input type="password" id="merchant-signup-password-confirm" placeholder="Confirm Password" required>
+        <select id="merchant-signup-category" required>
+          <option value="">Select Category</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Food">Food</option>
+          <option value="Building Materials">Building Materials</option>
+          <option value="Automobile">Automobile</option>
+          <option value="Home & Living">Home & Living</option>
+          <option value="Books">Books</option>
+          <option value="Travels">Travels</option>
+          <!-- Add more categories as needed -->
+        </select>
+        <button type="submit" class="gradient-btn">Register</button>
+      </form>
+    </div>
+    <!-- Customer Sign Up -->
+    <div id="customer-signup" class="tab-content">
+      <h2 class="auth-title">Customer Sign Up</h2>
+      <form onsubmit="handleSignUp(event, 'customer')">
+        <div class="name-fields">
+          <input type="text" id="customer-signup-surname" placeholder="Surname" required>
+          <input type="text" id="customer-signup-firstname" placeholder="First Name" required>
+          <input type="text" id="customer-signup-middlename" placeholder="Middle Name">
+        </div>
+        <select id="customer-signup-nationality" required>
+          <option value="">Select Nationality</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Kenya">Kenya</option>
+          <option value="South Africa">South Africa</option>
+          <option value="United States">United States</option>
+          <!-- Add more countries as needed -->
+        </select>
+        <input type="email" id="customer-signup-email" placeholder="Email" required>
+        <input type="text" id="customer-signup-username" placeholder="Username" required>
+        <input type="password" id="customer-signup-password" placeholder="Password" required>
+        <input type="password" id="customer-signup-password-confirm" placeholder="Confirm Password" required>
+        <button type="submit" class="gradient-btn">Register</button>
+      </form>
+    </div>
+    <p class="auth-switch">Already have an account? <a href="sign.html">Sign In</a></p>
+  </main>
+  <script>
+    // Tab switching logic for sign up
+    const merchantTabSU = document.getElementById('merchant-tab-su');
+    const customerTabSU = document.getElementById('customer-tab-su');
+    const merchantSignup = document.getElementById('merchant-signup');
+    const customerSignup = document.getElementById('customer-signup');
+    merchantTabSU.onclick = function() {
+      merchantTabSU.classList.add('active');
+      customerTabSU.classList.remove('active');
+      merchantSignup.classList.add('active');
+      customerSignup.classList.remove('active');
+    };
+    customerTabSU.onclick = function() {
+      customerTabSU.classList.add('active');
+      merchantTabSU.classList.remove('active');
+      customerSignup.classList.add('active');
+      merchantSignup.classList.remove('active');
+    };
+
+    function isStrongPassword(password) {
+      // Basic check: at least 8 characters (Firebase requires minimum 6)
+      return password && password.length >= 8;
+    }
+    // Validation will be handled in auth.js handleSignUp
+  </script>
+  <script src="main.js"></script>
+  <script src="auth.js"></script>
+</body>
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,4 +139,5 @@
 
   <script src="/script.js"></script>
 </body>
+>>>>>>> a9640d8546ce7ea728020b7bceabeef443adce03
 </html>

@@ -1,0 +1,113 @@
+{
+    "success": true,
+    "products": [
+        {
+            "name": "Fresh Apples",
+            "category": "Consumables",
+            "subcategory": "Fruits",
+            "seller": "Mary's Farm",
+            "price": 2.50,
+            "description": "Crisp and juicy red apples.",
+            "image": "images/apple.jpg"
+        },
+        {
+            "name": "Organic Bananas",
+            "category": "Consumables",
+            "subcategory": "Fruits",
+            "seller": "Green Valley",
+            "price": 1.20,
+            "description": "Sweet organic bananas.",
+            "image": "images/banana.jpg"
+        },
+        {
+            "name": "Carrots",
+            "category": "Consumables",
+            "subcategory": "Vegetables",
+            "seller": "Farm Fresh",
+            "price": 1.00,
+            "description": "Fresh crunchy carrots.",
+            "image": "images/carrot.jpg"
+        },
+        {
+            "name": "Broccoli",
+            "category": "Consumables",
+            "subcategory": "Vegetables",
+            "seller": "Healthy Harvest",
+            "price": 2.00,
+            "description": "Nutritious green broccoli.",
+            "image": "images/broccoli.jpg"
+        },
+        {
+            "name": "Whole Milk",
+            "category": "Consumables",
+            "subcategory": "Dairy",
+            "seller": "Dairy Delight",
+            "price": 3.50,
+            "description": "Fresh whole milk.",
+            "image": "images/milk.jpg"
+        },
+        {
+            "name": "Cheddar Cheese",
+            "category": "Consumables",
+            "subcategory": "Dairy",
+            "seller": "Cheese Corner",
+            "price": 4.00,
+            "description": "Sharp cheddar cheese.",
+            "image": "images/cheese.jpg"
+        },
+        {
+            "name": "Cement Bags",
+            "category": "Building Materials",
+            "subcategory": "Cement",
+            "seller": "BuildPro Supplies",
+            "price": 15.00,
+            "description": "High-quality cement for construction.",
+            "image": "images/cement.jpg"
+        },
+        {
+            "name": "Steel Rebars",
+            "category": "Building Materials",
+            "subcategory": "Steel",
+            "seller": "MetalWorks",
+            "price": 25.00,
+            "description": "Durable steel rebars.",
+            "image": "images/rebar.jpg"
+        },
+        {
+            "name": "Wood Planks",
+            "category": "Building Materials",
+            "subcategory": "Wood",
+            "seller": "TimberLand",
+            "price": 10.00,
+            "description": "Strong wooden planks.",
+            "image": "images/wood.jpg"
+        },
+        {
+            "name": "LED Bulbs",
+            "category": "Electricals and Electronics",
+            "subcategory": "Lighting",
+            "seller": "ElectroShop",
+            "price": 5.00,
+            "description": "Energy-efficient LED bulbs.",
+            "image": "images/led.jpg"
+        },
+        {
+            "name": "Wires",
+            "category": "Electricals and Electronics",
+            "subcategory": "Wiring",
+            "seller": "WireMasters",
+            "price": 20.00,
+            "description": "Copper electrical wires.",
+            "image": "images/wire.jpg"
+        },
+        {
+            "name": "Smartphone",
+            "category": "Electricals and Electronics",
+            "subcategory": "Devices",
+            "seller": "TechHub",
+            "price": 300.00,
+            "description": "Latest smartphone model.",
+            "image": "images/phone.jpg"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign in with Google - GlenHub</title>
+  <link rel="stylesheet" href="glen.css" />
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; margin: 0; }
+    .container { max-width: 400px; margin: 60px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px 24px; text-align: center; }
+    h1 { color: var(--primary-color); margin-bottom: 18px; }
+    .google-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      padding: 10px 24px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #444;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      transition: box-shadow 0.2s;
+      margin: 24px auto 0 auto;
+      width: 100%;
+      max-width: 320px;
+    }
+    .google-btn:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.10); }
+    .google-icon {
+      width: 28px;
+      height: 28px;
+      margin-right: 14px;
+      vertical-align: middle;
+    }
+    .back-link { display: inline-block; margin-top: 24px; color: #2196f3; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sign in with Google</h1>
+    <button class="google-btn">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="google-icon" />
+      Continue with Google
+    </button>
+    <div id="gs-error" style="color:#b00020;margin-top:12px;display:none;"></div>
+    <a href="sign.html" class="back-link">&larr; Back to Sign In</a>
+  </div>
+  <script>
+    document.querySelector('.google-btn').onclick = function() {
+      const errDiv = document.getElementById('gs-error');
+      errDiv.style.display = 'block';
+      errDiv.textContent = 'Google sign-in is temporarily unavailable. Please use the regular email/password login.';
+    };
+  </script>
+</body>
+</html>

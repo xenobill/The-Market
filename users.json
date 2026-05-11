@@ -1,0 +1,99 @@
+[
+  {
+    "id": "55e40b59-65a2-4981-9e6c-7047c03be2ae",
+    "username": "auto_admin",
+    "email": "auto_admin@example.local",
+    "password": "$2b$10$stzC3CWd8eiatWWHwNG4ruQJKyxNAENeSfrzmPnyoLxfTOHarCkJq",
+    "role": "admin",
+    "createdAt": "2025-12-04T12:56:01.935Z"
+  },
+  {
+    "id": "0610e47c-b47f-4a71-acf0-df41298b3c3b",
+    "username": "mike_mig",
+    "email": "mike_mig@example.com",
+    "password": "$2b$10$nmmJcIWQBP24Qs7HNNRXbuS/JUELlhFZAyBrTxtW/tLupphAe3.C2",
+    "role": "customer",
+    "createdAt": "2025-12-04T12:56:02.284Z",
+    "cart": [],
+    "notifications": []
+  },
+  {
+    "id": "c617beae-7dda-4b79-b957-d28f6d6e5f2a",
+    "username": "testuser1",
+    "email": "testuser1@test.com",
+    "password": "$2b$10$iTFzv6t2HsMLEus/jSFVVOw5n6XbrbcTx7BzOeeMf2R/ZQZIP.Im2",
+    "role": "customer",
+    "createdAt": "2025-12-04T13:15:11.402Z"
+  },
+  {
+    "id": "4b4f0f95-5d02-4635-b90b-a68170374f12",
+    "username": "testuser123",
+    "email": "test@example.com",
+    "password": "$2b$10$cwjKq832uZAym/KmcbxRk.1cO740pi.g1XGUN1UpGgGPluDzMi2Ty",
+    "role": "customer",
+    "createdAt": "2025-12-04T13:55:23.766Z"
+  },
+  {
+    "id": "333cfda3-aef4-4dcc-b745-90e35dfdc7f8",
+    "username": "xenobill",
+    "email": "alaobichukwu@gmail.com",
+    "password": "$2b$10$plXSOT7.2Cp2AIm987qwNOtqxx8hy9wEuPeu0o.PY.mCbJ0oiXFge",
+    "role": "merchant",
+    "createdAt": "2025-12-04T14:04:46.616Z",
+    "notifications": [
+      {
+        "message": "Welcome, xenobill! Glad to have you on GlenHub.",
+        "time": 1764857086902
+      },
+      {
+        "message": "Welcome, xenobill! Glad to have you on GlenHub.",
+        "time": 1764858783645
+      }
+    ]
+  },
+  {
+    "id": "c35b3b47-e0e9-4e14-a77c-584a8a273ede",
+    "username": "merchant@example.com",
+    "email": "merchant@example.com",
+    "password": "$2b$10$vOVJGzmgshrfHf57wrMqLeakrTBBauKVVZZCpqhx8AAkduraNv73m",
+    "role": "merchant",
+    "firstname": "Merchant",
+    "middlename": "",
+    "surname": "Demo",
+    "nationality": "DemoLand",
+    "category": "Retail",
+    "createdAt": "2026-05-04T10:20:54.764Z",
+    "cart": [],
+    "notifications": []
+  },
+  {
+    "id": "0a68e6ca-8496-43fc-a3d7-a7c44a7638e8",
+    "username": "customer@example.com",
+    "email": "customer@example.com",
+    "password": "$2b$10$nwrwqMmC3PKa0s2aPBU6zu4eQE2JtiOpxcrXK6Rkv9cyGz/0c4FcC",
+    "role": "customer",
+    "firstname": "Customer",
+    "middlename": "",
+    "surname": "Demo",
+    "nationality": "DemoLand",
+    "category": "",
+    "createdAt": "2026-05-04T10:20:54.853Z",
+    "cart": [],
+    "notifications": []
+  },
+  {
+    "id": "eb256896-d088-4999-bad2-849607fc0858",
+    "username": "Alaobichinwe",
+    "email": "alaobichinwe@local",
+    "password": "$2b$10$gsJZU6kWz8OQF70DtIBUauh2PUz30Tcrs19YXPDDM8gH.W22pzCfW",
+    "role": "admin",
+    "firstname": "",
+    "middlename": "",
+    "surname": "",
+    "nationality": "",
+    "category": "",
+    "createdAt": "2026-05-11T01:56:53.822Z",
+    "cart": [],
+    "notifications": []
+  }
+]

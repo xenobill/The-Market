@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Tools - GlenHub</title>
+  <style>
+    body{font-family:Segoe UI,Arial,sans-serif;padding:18px}
+    textarea{width:100%;height:200px}
+    table{width:100%;border-collapse:collapse}
+    th,td{border:1px solid #ddd;padding:8px}
+    th{background:#f3f3f3}
+    .row{display:flex;gap:12px}
+  </style>
+</head>
+<body>
+  <h1>Admin Tools</h1>
+  <p>Requires admin session or migration secret (see `.env`).</p>
+  <div style="margin-bottom:12px">
+    <button id="refresh-users">Refresh Users</button>
+    <input id="migrate-secret" placeholder="Migration secret (optional)" style="width:300px" />
+  </div>
+  <div style="margin-bottom:12px">
+    <label>Paste JSON array of users to migrate (username,email,password,role optional):</label>
+    <textarea id="migrate-data" placeholder='[{"username":"joe","email":"joe@example.com","password":"pass"}]'></textarea>
+    <div class="row" style="margin-top:8px">
+      <button id="run-migrate">Run Migration</button>
+      <button id="clear-output">Clear Output</button>
+    </div>
+  </div>
+  <h2>Users</h2>
+  <div style="margin-bottom:8px">
+    <input id="lookup-username" placeholder="Lookup username" style="width:220px;margin-right:8px" />
+    <button id="view-user">View User</button>
+    <button id="export-csv" style="margin-left:12px">Export CSV</button>
+  </div>
+  <div id="users-output"></div>
+  <h2>Raw response / logs</h2>
+  <textarea id="output" readonly></textarea>
+
+<script>
+async function appendOut(txt){
+  const o = document.getElementById('output'); o.value = (o.value?o.value+'\n':'')+txt; o.scrollTop = o.scrollHeight;
+}
+
+document.getElementById('refresh-users').onclick = async function(){
+  try{
+    const res = await fetch('/api/users', { credentials: 'same-origin' });
+    const data = await res.json();
+    if(data.success){
+      const wrap = document.getElementById('users-output');
+      if(!data.users || data.users.length===0){ wrap.innerHTML = '<p>No users.</p>'; return }
+      let html = '<table><tr><th>Username</th><th>Email</th><th>Role</th><th>Cart</th><th>Notifications</th></tr>';
+      for(const u of data.users){
+        html += `<tr><td>${u.username}</td><td>${u.email}</td><td>${u.role}</td><td>${JSON.stringify(u.cart||[]).slice(0,120)}</td><td>${JSON.stringify(u.notifications||[]).slice(0,120)}</td></tr>`;
+      }
+      html += '</table>';
+      wrap.innerHTML = html;
+      appendOut('Fetched '+data.users.length+' users');
+    } else {
+      appendOut('Failed: '+(data.message||JSON.stringify(data)));
+    }
+  }catch(e){ appendOut('Error fetching users: '+e.message) }
+}
+
+document.getElementById('run-migrate').onclick = async function(){
+  const txt = document.getElementById('migrate-data').value.trim();
+  if(!txt){ appendOut('No data to migrate'); return }
+  let payload;
+  try{ payload = JSON.parse(txt); }catch(e){ appendOut('Invalid JSON'); return }
+  const secret = document.getElementById('migrate-secret').value.trim();
+  try{
+    const headers = { 'Content-Type':'application/json' };
+    if(secret) headers['x-migration-secret'] = secret;
+    const res = await fetch('/migrate_users', { method:'POST', headers, body: JSON.stringify(payload) });
+    const data = await res.json();
+    appendOut('Migrate response: '+JSON.stringify(data));
+    if(data.success) document.getElementById('migrate-data').value='';
+  }catch(e){ appendOut('Migration error: '+e.message) }
+}
+
+document.getElementById('clear-output').onclick = function(){ document.getElementById('output').value=''; }
+
+document.getElementById('view-user').onclick = async function(){
+  const username = document.getElementById('lookup-username').value.trim();
+  if(!username){ appendOut('Enter a username to lookup'); return }
+  try{
+    const res = await fetch('/api/users', { credentials: 'same-origin' });
+    const data = await res.json();
+    if(data.success){
+      const u = (data.users||[]).find(x => x.username && x.username.toLowerCase() === username.toLowerCase());
+      const wrap = document.getElementById('users-output');
+      if(!u) { wrap.innerHTML = '<p>User not found.</p>'; appendOut('Lookup: not found'); return }
+      wrap.innerHTML = `<pre>${JSON.stringify(u, null, 2)}</pre>`;
+      appendOut('Lookup: found '+u.username);
+    } else appendOut('Failed to fetch users for lookup');
+  }catch(e){ appendOut('Lookup error: '+e.message) }
+}
+
+document.getElementById('export-csv').onclick = async function(){
+  try{
+    const res = await fetch('/api/users', { credentials: 'same-origin' });
+    const data = await res.json();
+    if(!data.success){ appendOut('Export failed'); return }
+    const users = data.users || [];
+    if(users.length===0){ appendOut('No users to export'); return }
+    const headers = ['id','username','email','role','createdAt','cart','notifications'];
+    const rows = users.map(u => {
+      return headers.map(h => {
+        const v = u[h];
+        if (h==='cart' || h==='notifications') return '"'+JSON.stringify(v).replace(/"/g,'""')+'"';
+        return '"'+(v||'')+'"';
+      }).join(',');
+    });
+    const csv = headers.join(',') + '\n' + rows.join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'glenhub_users.csv'; document.body.appendChild(a); a.click(); a.remove();
+    appendOut('Exported '+users.length+' users');
+  }catch(e){ appendOut('Export error: '+e.message) }
+}
+</script>
+</body>
+</html>

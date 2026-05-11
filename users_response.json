@@ -1,0 +1,18 @@
+﻿{
+    "success":  true,
+    "users":  [
+                  {
+                      "id":  "55e40b59-65a2-4981-9e6c-7047c03be2ae",
+                      "username":  "auto_admin",
+                      "email":  "auto_admin@example.local",
+                      "role":  "admin",
+                      "createdAt":  "2025-12-04T12:56:01.935Z",
+                      "cart":  [
+
+                               ],
+                      "notifications":  [
+
+                                        ]
+                  }
+              ]
+}

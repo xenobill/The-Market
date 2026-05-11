@@ -1,0 +1,16 @@
+node_modules
+
+# Environment
+.env
+
+# Logs
+npm-debug.log*
+server.log
+client.log
+
+# Uploads (may be large or sensitive)
+uploads/
+
+# Generated files
+users.json
+products.json

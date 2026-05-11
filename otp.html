@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Verification - Glen Hub</title>
+  <link rel="stylesheet" href="glen.css">
+  <style>
+    #dark-mode-toggle { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <span id="dark-mode-toggle" title="Toggle dark mode">🌙</span>
+  <main class="auth-container">
+    <h2>Email Verification</h2>
+    <p>Enter the OTP sent to your email address.</p>
+    <form onsubmit="handleOTP(event)">
+      <input type="text" id="otp-code" placeholder="Enter OTP" required>
+      <button type="submit" class="gradient-btn">Verify</button>
+    </form>
+    <p id="otp-message"></p>
+  </main>
+  <script src="main.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,3 +1,1002 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Merchant Dashboard - GlenHub</title>
+  <link rel="stylesheet" href="glen.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+    }
+    
+    .dashboard-container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    /* Main Content */
+    .dashboard-content {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .dashboard-header {
+      background: var(--surface-color);
+      padding: 20px 30px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .dashboard-header h1 {
+      font-size: 28px;
+      color: var(--text-color);
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--text-color);
+    }
+    
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    .dashboard-main {
+      flex: 1;
+      padding: 30px;
+    }
+    
+    .page-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    .page-section.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Dashboard Overview */
+    .dashboard-overview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .stat-card {
+      background: var(--surface-color);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .stat-card-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+    
+    .stat-card-value {
+      font-size: 28px;
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+    
+    .stat-card-label {
+      color: #666;
+      font-size: 14px;
+    }
+    
+    /* Products Section */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .product-card {
+      background: var(--surface-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .product-image {
+      width: 100%;
+      height: 200px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      color: #999;
+    }
+    
+    .product-info {
+      padding: 15px;
+    }
+    
+    .product-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+    
+    .product-price {
+      color: var(--primary-color);
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .product-actions {
+      display: flex;
+      gap: 10px;
+      font-size: 20px;
+    }
+    
+    .product-actions button {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    .product-actions button:hover {
+      background: var(--primary-color-dark);
+    }
+    
+    /* Upload Product Form */
+    .upload-form {
+      background: var(--surface-color);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--text-color);
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 5px rgba(244, 67, 54, 0.3);
+    }
+    
+    .submit-btn {
+      background: var(--primary-color);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+      transition: transform 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: var(--primary-color-dark);
+    }
+    
+    /* Profile Section */
+    .profile-container {
+      background: var(--surface-color);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #eee;
+    }
+    
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+    }
+    
+    .profile-details {
+      flex: 1;
+    }
+    
+    .profile-details h2 {
+      font-size: 24px;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+    
+    .profile-details p {
+      color: #666;
+      margin-bottom: 3px;
+    }
+    
+    .profile-field {
+      margin-bottom: 20px;
+    }
+    
+    .profile-field label {
+      display: block;
+      font-weight: bold;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+    
+    .profile-field span {
+      color: #666;
+      padding: 10px;
+      background: #f9f9f9;
+      border-radius: 5px;
+      display: block;
+    }
+    
+    .profile-actions {
+      margin-top: 20px;
+      text-align: center;
+    }
+    
+    .edit-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+    
+    .edit-btn:hover {
+      background: var(--primary-hover);
+    }
+    
+    /* Edit Profile Form */
+    .edit-profile-form {
+      max-width: 500px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: var(--text-color);
+      margin-bottom: 8px;
+    }
+    
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      background: var(--surface-color);
+      color: var(--text-color);
+    }
+    
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    
+    .profile-picture-preview {
+      margin-top: 10px;
+    }
+    
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+    
+    .submit-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+      background: var(--primary-hover);
+    }
+    
+    .cancel-btn {
+      background: #666;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+    
+    .cancel-btn:hover {
+      background: #555;
+    }
+    
+    /* Care Assistant */
+    .care-section {
+      background: var(--surface-color);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .care-message {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .care-message.user {
+      justify-content: flex-end;
+    }
+    
+    .care-message.assistant {
+      justify-content: flex-start;
+    }
+    
+    .message-bubble {
+      max-width: 70%;
+      padding: 12px 15px;
+      border-radius: 15px;
+      font-size: 14px;
+    }
+    
+    .user .message-bubble {
+      background: var(--primary-color);
+      color: white;
+      border-bottom-right-radius: 3px;
+    }
+    
+    .assistant .message-bubble {
+      background: #f0f0f0;
+      color: var(--text-color);
+      border-bottom-left-radius: 3px;
+    }
+    
+    .care-input-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .care-input-group input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    
+    .care-input-group button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .care-input-group button:hover {
+      background: var(--primary-color-dark);
+    }
+    
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 80px;
+      }
+      
+      .sidebar-item-text {
+        display: none;
+      }
+      
+      .dashboard-main {
+        padding: 15px;
+      }
+      
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      <!-- Header -->
+      <div class="dashboard-header">
+        <h1 id="page-title">Merchant Dashboard</h1>
+        <div class="user-info">
+          <span class="icon" id="dark-mode-toggle" title="Toggle dark mode" style="font-size: 24px;">🌙</span>
+          <span id="merchant-username">Merchant</span>
+          <div class="user-avatar" id="avatar-icon">M</div>
+        </div>
+      </div>
+      
+      <!-- Content Area -->
+      <div class="dashboard-main">
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page-section active">
+          <div class="dashboard-overview">
+            <div class="stat-card">
+              <div class="stat-card-icon">📦</div>
+              <div class="stat-card-value" id="total-products">0</div>
+              <div class="stat-card-label">Total Products</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-icon">💰</div>
+              <div class="stat-card-value" id="total-sales">$0</div>
+              <div class="stat-card-label">Total Sales</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card-icon">👥</div>
+              <div class="stat-card-value" id="total-customers">0</div>
+              <div class="stat-card-label">Customers</div>
+            </div>
+          </div>
+          <h2 style="margin-top: 30px; margin-bottom: 20px;">Recent Products</h2>
+          <div class="products-grid" id="recent-products"></div>
+        </div>
+        
+        <!-- Products Page -->
+        <div id="products" class="page-section">
+          <h2 style="margin-bottom: 20px;">Your Products</h2>
+          <div class="products-grid" id="all-products"></div>
+        </div>
+        
+        <!-- Upload Product Page -->
+        <div id="upload" class="page-section">
+          <h2 style="margin-bottom: 20px;">Upload New Product</h2>
+          <form class="upload-form" onsubmit="handleUploadProduct(event)">
+            <div class="form-group">
+              <label>Product Name *</label>
+              <input type="text" id="product-name" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group">
+              <label>Price (₦) *</label>
+              <input type="number" id="product-price" placeholder="Enter price" required min="0" step="0.01">
+            </div>
+            <div class="form-group">
+              <label>Description *</label>
+              <textarea id="product-description" placeholder="Enter product description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label>Product Image *</label>
+              <input type="file" id="product-image" accept="image/*" required>
+            </div>
+            <button type="submit" class="submit-btn">Upload Product</button>
+          </form>
+        </div>
+        
+        <!-- Customer Care Page -->
+        <div id="care" class="page-section">
+          <div class="care-section">
+            <h2 style="margin-bottom: 20px;">Customer Care Assistant</h2>
+            <div id="care-messages" style="max-height: 400px; overflow-y: auto; border: 1px solid #eee; border-radius: 10px; padding: 15px;">
+              <div class="care-message assistant">
+                <div class="message-bubble">Hello! I'm your customer care assistant. How can I help you today?</div>
+              </div>
+            </div>
+            <div class="care-input-group">
+              <input type="text" id="care-input" placeholder="Type your message...">
+              <button type="button" onclick="sendCareMessage()">Send</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Profile Page -->
+        <div id="profile" class="page-section">
+          <div class="profile-container">
+            <div class="profile-header">
+              <div class="profile-avatar" id="profile-avatar">M</div>
+              <div class="profile-details">
+                <h2 id="profile-name">Merchant Name</h2>
+                <p id="profile-email">merchant@example.com</p>
+                <p id="profile-role">Merchant Account</p>
+              </div>
+            </div>
+            <div class="profile-field">
+              <label>Username</label>
+              <span id="profile-username">-</span>
+            </div>
+            <div class="profile-field">
+              <label>Email</label>
+              <span id="profile-email-display">-</span>
+            </div>
+            <div class="profile-field">
+              <label>Account Type</label>
+              <span id="profile-type">Merchant</span>
+            </div>
+            <div class="profile-field">
+              <label>Member Since</label>
+              <span id="profile-joined">-</span>
+            </div>
+            <div class="profile-actions">
+              <button class="edit-btn" onclick="toggleEditProfile()">Edit Profile</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Edit Profile Page -->
+        <div id="edit-profile" class="page-section">
+          <div class="profile-container">
+            <h2>Edit Your Profile</h2>
+            <form class="edit-profile-form" onsubmit="handleUpdateProfile(event)">
+              <div class="form-group">
+                <label>Profile Picture</label>
+                <input type="file" id="profile-picture" accept="image/*" onchange="previewProfilePicture(event)">
+                <div class="profile-picture-preview">
+                  <img id="profile-picture-preview" src="" alt="Preview" style="display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="edit-username" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="edit-email" required>
+              </div>
+              <div class="form-group">
+                <label>Business Name (optional)</label>
+                <input type="text" id="edit-business-name" placeholder="Your business/store name">
+              </div>
+              <div class="form-group">
+                <label>Current Password (required to save changes)</label>
+                <input type="password" id="current-password" required>
+              </div>
+              <div class="form-group">
+                <label>New Password (leave blank to keep current)</label>
+                <input type="password" id="new-password">
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="submit-btn">Save Changes</button>
+                <button type="button" class="cancel-btn" onclick="switchPage(event, 'profile')">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Load merchant data on page load
+    function initMerchantDashboard() {
+      const user = getClientUser();
+      if (!user || user.role !== 'merchant') {
+        window.location.href = 'sign.html';
+        return;
+      }
+      
+      // Update UI with user data
+      document.getElementById('merchant-username').textContent = user.username || 'Merchant';
+      const avatar = user.username.charAt(0).toUpperCase();
+      document.getElementById('avatar-icon').textContent = avatar;
+      document.getElementById('profile-avatar').textContent = avatar;
+      document.getElementById('profile-name').textContent = user.username || 'Merchant';
+      document.getElementById('profile-email').textContent = user.email || 'N/A';
+      document.getElementById('profile-username').textContent = user.username || '-';
+      document.getElementById('profile-email-display').textContent = user.email || '-';
+      document.getElementById('profile-joined').textContent = new Date(user.createdAt).toLocaleDateString() || '-';
+      
+      // Update profile picture
+      const profileAvatar = document.getElementById('profile-avatar');
+      if (user.profilePicture) {
+        profileAvatar.innerHTML = `<img src="${user.profilePicture}" alt="Profile" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+      } else {
+        profileAvatar.textContent = avatar;
+      }
+      
+      // Load products
+      loadMerchantProducts();
+    }
+    
+    function getClientUser() {
+      try {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        return loggedInUser ? JSON.parse(loggedInUser) : null;
+      } catch (e) {
+        console.warn('Failed to parse loggedInUser:', e);
+        return null;
+      }
+    }
+    
+    function loadMerchantProducts() {
+      fetch('/products')
+        .then(r => r.json())
+        .then(data => {
+          if (data.success && Array.isArray(data.products)) {
+            const user = getClientUser();
+            const merchantProducts = data.products.filter(p => 
+              p.merchant === user.username || p.merchant === user.id
+            );
+            
+            document.getElementById('total-products').textContent = merchantProducts.length;
+            renderProducts(merchantProducts.slice(0, 3), 'recent-products');
+            renderProducts(merchantProducts, 'all-products');
+          }
+        })
+        .catch(err => console.error('Failed to load products:', err));
+      
+      // Load sales statistics
+      loadMerchantSales();
+    }
+    
+    function loadMerchantSales() {
+      fetch('/api/merchant_sales', {
+        credentials: 'same-origin'
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success && data.stats) {
+          document.getElementById('total-sales').textContent = '₦' + (data.stats.totalSales || 0).toLocaleString();
+          document.getElementById('total-customers').textContent = data.stats.totalCustomers || 0;
+        }
+      })
+      .catch(err => console.error('Failed to load sales:', err));
+    }
+    
+    function renderProducts(products, containerId) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = '';
+      
+      if (products.length === 0) {
+        container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No products yet</p>';
+        return;
+      }
+      
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-image" style="background-image: url('${product.image}'); background-size: cover; background-position: center;">
+            ${!product.image ? '🖼️' : ''}
+          </div>
+          <div class="product-info">
+            <div class="product-name">${product.name}</div>
+            <div class="product-price">₦${product.price}</div>
+            <div style="font-size: 12px; color: #999; margin-bottom: 10px;">${product.desc || 'No description'}</div>
+            <div class="product-actions">
+              <button type="button" onclick="deleteProduct('${product.name}')">Delete</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+    
+    function switchPage(event, page) {
+      // Hide all sections
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      
+      // Show selected section
+      document.getElementById(page).classList.add('active');
+      
+      // Update sidebar active state (for the new global sidebar)
+      const sidebar = document.getElementById('sidebar');
+      if (sidebar) {
+        sidebar.querySelectorAll('a').forEach(item => {
+          item.classList.remove('active');
+        });
+        event.target.closest('a').classList.add('active');
+      }
+      
+      // Close sidebar on mobile after selection
+      if (window.innerWidth < 992 && sidebar && sidebar.classList.contains('active')) {
+        toggleSidebar();
+      }
+      
+      // Update page title
+      const titles = {
+        dashboard: 'Merchant Dashboard',
+        products: 'Your Products',
+        upload: 'Upload Product',
+        care: 'Customer Care',
+        profile: 'Profile',
+        'edit-profile': 'Edit Profile'
+      };
+      document.getElementById('page-title').textContent = titles[page] || 'Dashboard';
+      
+      // Load edit form data if switching to edit profile
+      if (page === 'edit-profile') {
+        loadEditProfileData();
+      }
+    }
+    
+    function toggleEditProfile() {
+      switchPage({ target: { closest: () => ({ classList: { add: () => {} } }) } }, 'edit-profile');
+    }
+    
+    function loadEditProfileData() {
+      const user = getClientUser();
+      document.getElementById('edit-username').value = user.username || '';
+      document.getElementById('edit-email').value = user.email || '';
+      document.getElementById('edit-business-name').value = user.businessName || '';
+      // Profile picture would be loaded from user data
+      if (user.profilePicture) {
+        document.getElementById('profile-picture-preview').src = user.profilePicture;
+        document.getElementById('profile-picture-preview').style.display = 'block';
+      }
+    }
+    
+    function previewProfilePicture(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profile-picture-preview').src = e.target.result;
+          document.getElementById('profile-picture-preview').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+    
+    async function handleUpdateProfile(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('edit-username').value.trim();
+      const email = document.getElementById('edit-email').value.trim();
+      const businessName = document.getElementById('edit-business-name').value.trim();
+      const currentPassword = document.getElementById('current-password').value;
+      const newPassword = document.getElementById('new-password').value;
+      const profilePicture = document.getElementById('profile-picture').files[0];
+      
+      if (!username || !email || !currentPassword) {
+        alert('Please fill in all required fields');
+        return;
+      }
+      
+      try {
+        const formData = new FormData();
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('businessName', businessName);
+        formData.append('currentPassword', currentPassword);
+        if (newPassword) formData.append('newPassword', newPassword);
+        if (profilePicture) formData.append('profilePicture', profilePicture);
+        
+        const response = await fetch('/api/update_profile', {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin'
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Update localStorage
+          const user = getClientUser();
+          user.username = username;
+          user.email = email;
+          user.businessName = businessName;
+          if (data.profilePicture) user.profilePicture = data.profilePicture;
+          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          
+          alert('Profile updated successfully!');
+          switchPage(event, 'profile');
+          initMerchantDashboard(); // Refresh display
+        } else {
+          alert('Failed to update profile: ' + (data.message || 'Unknown error'));
+        }
+      } catch (error) {
+        console.error('Update profile error:', error);
+        alert('Failed to update profile: ' + error.message);
+      }
+    }
+    
+    function handleUploadProduct(event) {
+      event.preventDefault();
+      
+      const formData = new FormData();
+      formData.append('name', document.getElementById('product-name').value);
+      formData.append('price', document.getElementById('product-price').value);
+      formData.append('desc', document.getElementById('product-description').value);
+      formData.append('image', document.getElementById('product-image').files[0]);
+      formData.append('merchant', getClientUser().username);
+      
+      fetch('/api/upload_product', {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: formData
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          alert('Product uploaded successfully!');
+          event.target.reset();
+          switchPage(event, 'products');
+          loadMerchantProducts();
+        } else {
+          alert('Upload failed: ' + (data.message || 'Unknown error'));
+        }
+      })
+      .catch(err => alert('Upload error: ' + err.message));
+    }
+    
+    async function deleteProduct(productName) {
+      if (!confirm('Are you sure you want to delete this product?')) return;
+      try {
+        const res = await fetch('/api/delete_product', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ name: productName })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert('Product deleted successfully!');
+          loadMerchantProducts();
+        } else {
+          alert('Delete failed: ' + (data.message || 'Unknown error'));
+        }
+      } catch (err) {
+        console.error('Delete product error:', err);
+        alert('Delete failed: ' + err.message);
+      }
+    }
+    
+    function sendCareMessage() {
+      const input = document.getElementById('care-input');
+      const message = input.value.trim();
+      
+      if (!message) return;
+      
+      const container = document.getElementById('care-messages');
+      
+      // Add user message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'care-message user';
+      userMsg.innerHTML = `<div class="message-bubble">${message}</div>`;
+      container.appendChild(userMsg);
+      
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+      
+      // Simulate assistant response after 1 second
+      setTimeout(() => {
+        const assistantMsg = document.createElement('div');
+        assistantMsg.className = 'care-message assistant';
+        assistantMsg.innerHTML = `<div class="message-bubble">Thanks for your message! Our team will respond shortly.</div>`;
+        container.appendChild(assistantMsg);
+        container.scrollTop = container.scrollHeight;
+      }, 1000);
+    }
+    
+    function handleLogout() {
+      if (confirm('Are you sure you want to logout?')) {
+        fetch('/api/signout', {
+          method: 'POST',
+          credentials: 'same-origin'
+        }).then(() => {
+          localStorage.removeItem('loggedInUser');
+          window.location.href = 'sign.html';
+        });
+      }
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initMerchantDashboard);
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
+=======
 <!-- seller-dashboard.html --><!DOCTYPE html><html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -26,3 +1025,4 @@
     </body>
     </html>
   
+>>>>>>> a9640d8546ce7ea728020b7bceabeef443adce03

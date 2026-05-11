@@ -1,0 +1,41 @@
+﻿{
+    "success":  true,
+    "products":  [
+        {
+            "name": "Fresh Apples",
+            "category": "Fruits",
+            "seller": "Mary's Farm",
+            "price": 2.50
+        },
+        {
+            "name": "Organic Bananas",
+            "category": "Fruits",
+            "seller": "Green Valley",
+            "price": 1.20
+        },
+        {
+            "name": "Carrots",
+            "category": "Vegetables",
+            "seller": "Farm Fresh",
+            "price": 1.00
+        },
+        {
+            "name": "Broccoli",
+            "category": "Vegetables",
+            "seller": "Healthy Harvest",
+            "price": 2.00
+        },
+        {
+            "name": "Whole Milk",
+            "category": "Dairy",
+            "seller": "Dairy Delight",
+            "price": 3.50
+        },
+        {
+            "name": "Cheddar Cheese",
+            "category": "Dairy",
+            "seller": "Cheese Corner",
+            "price": 4.00
+        }
+    ]
+}

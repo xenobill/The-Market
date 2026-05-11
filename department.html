@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department</title>
+  <link rel="stylesheet" href="glen.css">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; margin: 0; }
+    .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); padding: 32px 24px; }
+    h1 { color: #f44336; margin-bottom: 18px; }
+    ul#department-list { padding: 0; margin: 0; }
+    ul#department-list li { background: #fafafa; border-radius: 8px; margin-bottom: 18px; padding: 18px 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); transition: box-shadow 0.2s; }
+    ul#department-list li:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.10); }
+    img { border-radius: 6px; }
+    .back-link { display: inline-block; margin-bottom: 18px; color: #2196f3; text-decoration: none; font-weight: bold; }
+    .back-link:hover { text-decoration: underline; }
+    header { background: #fff; padding: 10px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .logo-bar { display: flex; align-items: center; justify-content: space-between; max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 40px; margin-right: 8px; }
+    .brand { font-size: 24px; font-weight: bold; color: #f44336; }
+    .search-form { position: relative; margin: 0 auto; flex: 0 1 520px; max-width: 520px; min-width: 260px; }
+    .search-bar { width: 100%; padding: 12px 126px 12px 18px; border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 999px; background-color: var(--surface-color); font-size: 1rem; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; height: 44px; box-sizing: border-box; }
+    .search-bar:focus { border-color: rgba(233, 30, 99, 0.55); box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1); }
+    #search-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); height: 32px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease; cursor: pointer; border: none; border-radius: 999px; margin: 0; min-width: 78px; padding: 0 18px; background: linear-gradient(135deg, #e91e63, #d5007d); color: #fff; font-weight: 700; box-shadow: 0 4px 12px rgba(233, 30, 99, 0.25); line-height: 1; font-size: 0.95rem; }
+    .icons { display: flex; align-items: center; }
+    .icon { font-size: 18px; margin-left: 16px; cursor: pointer; }
+    .signin-btn { background: #f44336; color: #fff; padding: 10px 16px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; }
+    #search-btn:hover { transform: translateY(0); box-shadow: 0 6px 16px rgba(233, 30, 99, 0.3); background-color: rgb(221, 10, 80); }
+    #search-btn:active { transform: translateY(1px); box-shadow: 0 2px 8px rgba(233, 30, 99, 0.2); }
+    footer { text-align: center; padding: 16px 0; background: #fff; border-top: 1px solid #ddd; }
+    .gradient-btn { display: inline-block; padding: 10px 20px; margin: 10px 0; background: linear-gradient(45deg, #f44336, #ff4081); color: #fff; border: none; border-radius: 4px; text-decoration: none; }
+    .gradient-btn:hover { background: linear-gradient(45deg, #d32f2f, #f50057); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-bar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo" />
+        <span class="brand">GLEN</span>
+      </div>
+      <form class="search-form" onsubmit="handleSearch(event)">
+        <input type="text" placeholder="Search" id="searchInput" class="search-bar"/>
+        <button type="submit" id="search-btn">Search</button>
+      </form>
+      <div class="icons">
+        <span class="icon">🛒</span>
+        <span class="icon">🔔</span>
+        <a href="sign.html" class="signin-btn" id="signin-btn">Sign In</a>
+        <button id="logout-btn" class="signin-btn" style="display:none;">Logout</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <a href="Index.html" class="back-link">&larr; Back to Home</a>
+      <h1 id="department-title">Loading...</h1>
+      <ul id="department-list">
+        <li>Loading products...</li>
+      </ul>
+    </div>
+  </main>
+  <footer>
+    <p>Powered by: Xen Technologies</p>
+  </footer>
+  <script src="main.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cat = urlParams.get('cat');
+      if (cat) {
+        document.getElementById('department-title').textContent = cat;
+        fetch('/products').then(res => res.json()).then(data => {
+          if (data.success) {
+            const products = data.products.filter(p => p.category === cat);
+            const list = document.getElementById('department-list');
+            if (products.length > 0) {
+              list.innerHTML = products.map(p => `
+                <li>
+                  <img src="${p.image || 'placeholder.jpg'}" width="100" alt="${p.name}">
+                  <h3>${p.name}</h3>
+                  <p>${p.description}</p>
+                  <p>Sold by: ${p.seller}</p>
+                  <p>Price: $${p.price}</p>
+                  <button onclick="addToCart('${p.name}')">Add to Cart</button>
+                </li>
+              `).join('');
+            } else {
+              list.innerHTML = '<li>No products in this category.</li>';
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
