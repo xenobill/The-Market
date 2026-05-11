@@ -3,60 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Global Market</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>glenhub market
+  </title>
+  <link rel="stylesheet" href="glen.css" />
 </head>
 <body>
   <header>
     <div class="logo-bar">
       <div class="logo">
         <img src="logo.png" alt="Logo" />
-        <span class="brand">THE MARKET</span>
+        <span class="brand">GLEN</span>
       </div>
       <form class="search-form" onsubmit="handleSearch(event)">
         <input type="text" placeholder="Search" id="searchInput" class="search-bar"/>
+        <button type="submit" id="search-btn" class="search-btn">Search</button>
       </form>
       <div class="icons">
         <span class="icon">🛒</span>
         <span class="icon">🔔</span>
-        <a href="signin.html" class="signin-btn">Sign In</a>
+        <span class="icon" id="dark-mode-toggle" title="Toggle dark mode">🌙</span>
+       <a href="sign.html" class="signin-btn" id="signin-btn">Sign In</a>
+<button id="logout-btn" class="signin-btn" style="display:none;">Logout</button>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="search-section">
-      <h2>Search the Market</h2>
-      <form onsubmit="redirectToSearch(event)">
-        <input type="text" id="searchQuery" placeholder="What are you looking for?" required>
-        <button type="submit" class="gradient-btn">Search</button>
-      </form>
-
-    <section class="welcome">
+    <section class="welcome" id="welcome-section">
       <p><strong>Welcome,</strong><br>
-      to <em>the global market</em>, where you get stress free businesses.<br>
+      to <em>the GLEN global market</em>, where you get stress free businesses.<br>
       What are you buying from us today?</p>
     </section>
 
-    <section class="categories">
-      <div class="category"><h3>Fashion <span class="more">more…</span></h3></div>
-      <div class="category"><h3>Electronics &<br>gadgets <span class="more">more…</span></h3></div>
-      <div class="category"><h3>Food & groceries <span class="more">more…</span></h3></div>
-      <div class="category"><h3>Building materials <span class="more">more…</span></h3></div>
-      <div class="category"><h3>Restaurants <span class="more">more…</span></h3></div>
+    <!-- Video Player Section -->
+    <section class="video-player-section" id="video-section" style="display:none;">
+      <h2>Featured Video</h2>
+      <div class="video-upload-form" id="video-upload-form" style="margin-bottom: 20px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
+        <input type="file" id="video-file-input" accept="video/*" style="display: none;">
+        <button id="upload-video-btn" type="button" style="padding: 10px 20px; background: #e91e63; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Upload Video</button>
+        <p id="upload-status" style="margin-top: 10px; font-size: 0.9rem;"></p>
+      </div>
+      <div class="video-player-container">
+        <div id="video-display-iframe" style="display:none;">
+          <iframe id="video-player" width="100%" height="400" src="" title="Featured Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div id="video-display-local" style="display:none;">
+          <video id="video-player-local" width="100%" height="400" controls style="background: #000;">
+            <source id="video-source" src="" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+      <p id="video-description" class="video-description"></p>
     </section>
 
-    <section class="user-buttons">
-      <a href="signin.html?user=merchant" class="gradient-btn">Merchant</a>
-      <a href="signin.html?user=customer" class="gradient-btn">Customer</a>
+    <!-- Categories Section with Carousel -->
+    <div class="categories-header">
+      <h2>Shop by Category</h2>
+      <div class="carousel-controls">
+        <button id="carousel-prev" class="carousel-btn carousel-prev">← Previous</button>
+        <button id="carousel-next" class="carousel-btn carousel-next">Next →</button>
+      </div>
+    </div>
+    <section class="categories-carousel" id="categories-carousel">
+      <section class="categories" id="categories-section">
+        <!-- Products/services will be dynamically loaded here -->
+      </section>
     </section>
 
-    
+    <!-- Market Feed Section -->
+    <section class="market-feed" style="padding: 40px 20px; background: #f9f9f9;">
+      <h2 style="text-align: center; color: var(--text-color);">Market Feed</h2>
+      <div class="feed-container" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <div class="ad-box" style="width: 300px; padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+          <h3>Featured Product</h3>
+          <p>Check out our latest smartphone deals!</p>
+          <a href="department.html?cat=Electricals and Electronics" class="gradient-btn">Shop Now</a>
+        </div>
+        <div class="ad-box" style="width: 300px; padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; text-align: center;">
+          <h3>Building Special</h3>
+          <p>Discount on cement and steel this week!</p>
+          <a href="department.html?cat=Building Materials" class="gradient-btn">View Offers</a>
+        </div>
+      </div>
     </section>
-  </main>
-    <footer>
-    <p>Powered by: Xen Technologies</p>
+
+    <!-- Additional content to make page longer -->
+    <section class="extra-content" style="padding: 40px 20px; text-align: center;">
+      <h2>Why Choose GlenHub?</h2>
+      <p>GlenHub is your one-stop marketplace for fresh produce, quality goods, and seamless transactions. Connect with trusted merchants and enjoy stress-free shopping.</p>
+      <p>Explore a wide range of categories, from fruits and vegetables to dairy and more. Our platform ensures secure payments and fast delivery.</p>
+      <p>Join thousands of satisfied customers and start your shopping journey today!</p>
+      <div style="height: 400px; background: linear-gradient(to bottom, #f9f9f9, #e0e0e0); margin-top: 20px; display: flex; align-items: center; justify-content: center;">
+        <p>Placeholder for more content or images</p>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="about-us" style="padding: 40px 20px; background: var(--surface-color); text-align: center;">
+      <h2>About Us</h2>
+      <p>GlenHub was founded with the vision to revolutionize online marketplaces by connecting local merchants with customers worldwide. Our platform emphasizes trust, quality, and community.</p>
+      <p>Founded in 2023, we've grown to serve thousands of users with a focus on fresh produce, electronics, building materials, and more. Our team is dedicated to providing a seamless shopping experience.</p>
+      <p>Contact us at support@glenhub.com for any inquiries.</p>
+    </section>
+
+  <footer>
+    <p>Powered by: Xen Technologies | <a href="#about-us">About Us</a></p>
   </footer>
-  <script src="/script.js"></script>
+  <script src="main.js"></script>
+  <script src="modals.js"></script>
+  <script src="home.js"></script>
 </body>
 </html>
